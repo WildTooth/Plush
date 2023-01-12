@@ -1,0 +1,58 @@
+#Acts as a Blacklist for players, who are not allowed to join the server
+anti-join:
+  enabled: false # Enable or disable the anti-join feature
+  kick-message: 'You are not allowed to join this server!' # Message to be sent to the player
+  ban-message: 'You are not allowed to join this server!' # Message to be sent to the player
+  players: # List of UUID's who are not allowed to join the server
+      - '00000000-0000-0000-0000-000000000000' # Example UUID
+
+2-factor-authentication:
+  enabled: false # Enable or disable the 2-factor-authentication feature
+
+  # The following settings are only used if 2-factor-authentication is enabled
+
+  message: 'Please enter the 2FA code you received on your phone!' # Message to be sent to the player
+  kick-message: 'You did not enter the 2FA code in time!' # Message to be sent to the player
+  ban-message: 'You did not enter the correct 2FA code!' # Message to be sent to the player if he entered the wrong code
+
+  # Interval in which the 2-factor-authentication is required. Possible values: always, sometimes, never
+  # always: 2-factor-authentication is required every time the player joins the server
+  # sometimes: 2-factor-authentication is required every time the player joins the server, but not when the player last joined the server was less than 'X' minutes ago
+  # never: 2-factor-authentication is never required (not recommended)
+  interval: always
+  define-sometimes: 5 # Minutes after which the 2-factor-authentication is required again
+
+  check-uuids: # List of UUID's who are not allowed to join the server without 2FA
+      - '00000000-0000-0000-0000-000000000000' # Example UUID
+
+  check-permissions: # List of permissions of players who are not allowed to join the server without 2FA
+      - 'example.permission' # Example permission
+
+  check-groups: # List of groups who are not allowed to join the server without 2FA
+      - 'exampleGroup' # Example group
+
+illegal-action: # Settings for the illegal-action feature
+
+  illegal-items: false # Enable or disable the illegal-items feature
+  anti-craft: false # Enable or disable the anti-craft feature
+  anti-place: false # Enable or disable the anti-place feature
+
+  illegal-item-list:
+    - 'minecraft:example_item' # Example item
+
+security-threats:
+  enabled: false # Enable or disable the security-threats feature
+
+  # The following settings are only used if security-threats is enabled
+
+  # A list of all security threats and their threat level. Possible values: LOW, MEDIUM, HIGH
+  # LOW: The threat is not very dangerous and can be ignored
+  # MEDIUM: The threat is dangerous and should be handled kicks/removes the item from the player
+  # HIGH: The threat is very dangerous and should be handled immediately, bans the user immediately
+
+  threat-levels:
+    wrong-code: MEDIUM # Security threat level for wrong 2FA codes
+    inventory-contains-illegal: MEDIUM # Security threat level for players who have illegal items in their inventory
+    placed-illegal-block: MEDIUM # Security threat level for players who placed illegal blocks
+    crafted-illegal-item: MEDIUM # Security threat level for players who crafted illegal items
+    failed-execution-of-command: MEDIUM # Security threat level for players who failed to execute a command
