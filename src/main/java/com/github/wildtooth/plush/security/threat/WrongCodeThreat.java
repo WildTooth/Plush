@@ -1,22 +1,28 @@
 package com.github.wildtooth.plush.security.threat;
 
-import com.github.wildtooth.plush.security.ThreatHandler;
 import com.github.wildtooth.plush.util.ColorUtils;
 import org.bukkit.BanList;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+/**
+ * The type Wrong code threat.
+ */
 public class WrongCodeThreat extends Threat {
 
     private final Player cause;
 
-    public WrongCodeThreat(String string, ThreatLevel threatLevel, Player player) {
-        super(string, threatLevel);
-        this.cause = player;
+
+    public WrongCodeThreat(String description,
+                           ThreatLevel threatLevel,
+                           Player theCause) {
+        super(ThreatType.WRONG_CODE, description, threatLevel);
+        this.cause = theCause;
     }
 
+    /** {@inheritDoc} */
     @Override
-    public void execute(ThreatHandler handler) {
+    public void execute() {
         if (severity().equals(ThreatLevel.LOW)) return;
 
         if (severity().equals(ThreatLevel.MEDIUM)) {
@@ -36,10 +42,20 @@ public class WrongCodeThreat extends Threat {
         }
     }
 
+    /**
+     * Gets cause.
+     *
+     * @return the cause
+     */
     public Player getCause() {
         return cause;
     }
 
+    /**
+     * Severity threat level.
+     *
+     * @return the threat level
+     */
     public ThreatLevel severity() {
         return getThreatLevel();
     }
