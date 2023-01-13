@@ -6,11 +6,22 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class IllegalUseThreat extends Threat {
+/**
+ * The type Illegal use threat.
+ */
+public final class IllegalUseThreat extends Threat {
 
     private final ItemStack item;
     private final Player cause;
 
+    /**
+     * Instantiates a new Illegal use threat.
+     *
+     * @param description the description
+     * @param threatLevel the threat level
+     * @param theItem     the item
+     * @param thePlayer   the player
+     */
     public IllegalUseThreat(String description,
                             ThreatLevel threatLevel,
                             ItemStack theItem,
@@ -41,10 +52,20 @@ public class IllegalUseThreat extends Threat {
         }
     }
 
+    /**
+     * Gets item.
+     *
+     * @return the item
+     */
     public ItemStack getItem() {
         return item;
     }
 
+    /**
+     * Gets cause.
+     *
+     * @return the cause
+     */
     public Player getCause() {
         return cause;
     }

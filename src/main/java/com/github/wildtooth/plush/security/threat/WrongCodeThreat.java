@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 /**
  * The type Wrong code threat.
  */
-public class WrongCodeThreat extends Threat {
+public final class WrongCodeThreat extends Threat {
 
     private final Player cause;
 
