@@ -1,7 +1,5 @@
 package com.github.wildtooth.plush.security.threat;
 
-import com.github.wildtooth.plush.security.handler.ThreatHandler;
-
 /**
  * The interface Threat.
  */
@@ -29,20 +27,6 @@ public interface IThreat {
      * @return the threat level
      */
     ThreatLevel getThreatLevel();
-
-    /**
-     * Gets executor.
-     *
-     * @return the executor
-     */
-    ThreatHandler getExecutor();
-
-    /**
-     * Sets executor.
-     *
-     * @param handler the handler
-     */
-    void setExecutor(ThreatHandler handler);
 
     /**
      * Execute.
