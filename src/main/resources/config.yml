@@ -35,10 +35,15 @@ illegal-action: # Settings for the illegal-action feature
 
   illegal-items: false # Enable or disable the illegal-items feature
   anti-craft: false # Enable or disable the anti-craft feature
+  anti-pickup: false # Enable or disable the anti-pickup feature
   anti-place: false # Enable or disable the anti-place feature
 
+  # Find the names to enter, here: https://helpch.at/docs/1.8/org/bukkit/Material.html
+  # Example: https://helpch.at/docs/1.8/org/bukkit/Material.html#DIAMOND_SWORD
+  # The name of the item is DIAMOND_SWORD, so you have to enter DIAMOND_SWORD in the list
+  # CASE INSENSITIVE!
   illegal-item-list:
-    - 'minecraft:example_item' # Example item
+    - 'COMMAND' # Command Block
 
 security-threats:
   enabled: false # Enable or disable the security-threats feature
