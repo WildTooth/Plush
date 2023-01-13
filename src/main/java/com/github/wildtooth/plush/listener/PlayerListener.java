@@ -3,16 +3,32 @@ package com.github.wildtooth.plush.listener;
 import com.github.wildtooth.plush.Plush;
 import com.github.wildtooth.plush.event.item.IllegalItemUseEvent;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
+/**
+ * The type Player listener.
+ */
 public class PlayerListener implements Listener {
 
-    public PlayerListener(Plush plugin) {
+    /**
+     * Instantiates a new Player listener.
+     *
+     * @param plugin the plugin
+     */
+    public PlayerListener(@NotNull Plush plugin) {
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
+    /**
+     * On item use.
+     *
+     * @param event the event
+     */
+    @EventHandler
     public void onItemUse(PlayerInteractEvent event) {
         final Player player = event.getPlayer();
         final ItemStack item = event.getItem();

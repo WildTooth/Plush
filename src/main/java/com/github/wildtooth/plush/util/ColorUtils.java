@@ -14,7 +14,8 @@ import java.util.List;
 public final class ColorUtils {
     /**
      * Translates a string using an alternate color code character
-     * into an array of Strings that uses the internal {@link ChatColor}.COLOR.
+     * into an array of Strings that uses the
+     * <p>internal {@link ChatColor}.COLOR.</p>
      *
      * @param stringList The string(s) to translate.
      *
@@ -44,7 +45,7 @@ public final class ColorUtils {
 
     /**
      * Translates a string using an alternate color code character
-     * into a string that uses the internal {@link ChatColor}.COLOR.
+     * into a string that uses the <p>internal {@link ChatColor}.COLOR.</p>
      *
      * @param s The string to translate.
      *
