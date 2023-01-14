@@ -6,12 +6,11 @@ import java.util.List;
 
 /**
  * A utility class for converting between {@link ChatColor} and minecraft chat color codes.
- *
- * @since 0.0.1
- * @version 0.0.1
- * @author wildtooth
  */
 public final class ColorUtils {
+    private ColorUtils() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
     /**
      * Translates a string using an alternate color code character
      * into an array of Strings that uses the
