@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The type Threat activator.
  */
-public class ThreatActivator implements Listener {
+public final class ThreatActivator implements Listener {
 
     private final Plush plugin;
 

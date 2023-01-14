@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * The type Player listener.
  */
-public class PlayerListener implements Listener {
+public final class PlayerListener implements Listener {
 
     /**
      * Instantiates a new Player listener.

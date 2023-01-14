@@ -1,5 +1,8 @@
 package com.github.wildtooth.plush.security.threat;
 
+import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+
 /**
  * The interface Threat.
  */
@@ -28,9 +31,11 @@ public interface IThreat {
      */
     ThreatLevel getThreatLevel();
 
+    Player getCause();
+
     /**
      * Execute.
      */
-    void execute();
+    void execute(@NotNull ThreatLevel severity);
 
 }

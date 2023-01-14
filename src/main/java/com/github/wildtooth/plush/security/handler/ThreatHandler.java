@@ -19,6 +19,6 @@ public class ThreatHandler {
      * @param threat the threat
      */
     public void handle(Threat threat) {
-        threat.execute();
+        threat.execute(threat.getThreatLevel());
     }
 }
