@@ -78,7 +78,6 @@ public abstract class Threat implements IThreat {
         final Inventory inventory = getCause().getInventory();
         inventory.remove(((IllegalUseThreat) this).getItem());
 
-        final Player cause = getCause();
         getCause().sendMessage(
                 ColorUtils.getColored(
                         "&cAn item has been removed from your inventory! &4&lError Code: &c&l"
