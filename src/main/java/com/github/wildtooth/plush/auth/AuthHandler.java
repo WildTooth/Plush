@@ -51,6 +51,17 @@ public final class AuthHandler {
     }
 
     /**
+     * Checks if an {@link UUID} of a {@link Player} is authLocked.
+     *
+     * @param player The player to check the uuid of.
+     *
+     * @return True if the player is authLocked, false if not.
+     */
+    public boolean isAuthLocked(@NotNull Player player) {
+        return authLocked.contains(player.getUniqueId());
+    }
+
+    /**
      * Clears the list of {@link UUID}'s of {@link Player}'s.
      */
     public void clearAuthLocked() {

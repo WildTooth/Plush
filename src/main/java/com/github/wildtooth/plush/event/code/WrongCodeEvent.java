@@ -8,7 +8,7 @@ public class WrongCodeEvent extends CodeEvent {
     private static final HandlerList HANDLERS = new HandlerList();
     protected Player player;
 
-    public WrongCodeEvent(String theCode, Player thePlayer) {
+    public WrongCodeEvent(Integer theCode, Player thePlayer) {
         super(theCode);
         this.player = thePlayer;
     }
