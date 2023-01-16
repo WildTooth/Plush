@@ -9,21 +9,21 @@ public abstract class CodeEvent extends Event {
     /**
      * The Security Code.
      */
-    protected String code;
+    protected Integer code;
 
     /**
      * Instantiates a new Code event.
      *
      * @param theCode the security code
      */
-    public CodeEvent(String theCode) {
+    public CodeEvent(Integer theCode) {
         this.code = theCode;
     }
 
     /**
      * @return the security code used in the event.
      */
-    public final String getCode() {
+    public final Integer getCode() {
         return code;
     }
 

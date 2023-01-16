@@ -31,7 +31,7 @@ public final class ThreatActivator implements Listener {
      * @param event the event
      */
     @EventHandler
-    public void onIllegalItemUse(IllegalItemUseEvent event) {
+    public void onIllegalItemUse(@NotNull IllegalItemUseEvent event) {
         IllegalUseThreat threat = new IllegalUseThreat(
                 "Illegal item use detected",
                 ThreatLevel.LOW,
