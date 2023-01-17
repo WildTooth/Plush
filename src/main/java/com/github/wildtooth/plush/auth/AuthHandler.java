@@ -83,6 +83,4 @@ public final class AuthHandler {
             authLocked.remove(uuid);
         }
     }
-
-
 }

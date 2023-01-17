@@ -1,5 +1,7 @@
 package com.github.wildtooth.plush.security.threat;
 
+import com.github.wildtooth.plush.Plush;
+import com.github.wildtooth.plush.security.handler.ThreatHandler;
 import com.github.wildtooth.plush.util.ColorUtils;
 import org.bukkit.BanList;
 import org.bukkit.ChatColor;
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class Threat implements IThreat {
     private final String description;
+    private ThreatHandler executor;
     private final ThreatLevel threatLevel;
     private final ThreatType type;
     private final Player cause;
@@ -39,6 +42,16 @@ public abstract class Threat implements IThreat {
     }
 
     @Override
+    public ThreatHandler getExecutor() {
+        return executor;
+    }
+
+    @Override
+    public void setExecutor(ThreatHandler executor) {
+        this.executor = executor;
+    }
+
+    @Override
     public ThreatLevel getThreatLevel() {
         return threatLevel;
     }
@@ -55,24 +68,33 @@ public abstract class Threat implements IThreat {
 
     @Override
     public void execute(@NotNull ThreatLevel severity) {
-        if (severity.equals(ThreatLevel.LOW)) return;
+        Plush plugin = getExecutor().getPlugin();
+
+        plugin.getLog().info("[" + getThreatLevel().name() +"] " + getType().name() + " THREAT DETECTED: ");
+        plugin.getLog().info("Threat Description: " + getDescription());
+        plugin.getLog().info("Player: " + getCause().getName());
+
+        if (severity.equals(ThreatLevel.LOW)) {
+            plugin.getLog().info("Handling: " + "Ignored, threat level is configured to low.");
+            return;
+        }
 
         if (severity.equals(ThreatLevel.MEDIUM)) {
             if (this instanceof IllegalUseThreat) {
-                itemThreat(severity);
+                itemThreat(severity, plugin);
             }
             if (this instanceof WrongCodeThreat) {
-                codeThreat(severity);
+                codeThreat(severity, plugin);
             }
             return;
         }
 
         if (severity.equals(ThreatLevel.HIGH)) {
-            banPlayer(severity);
+            banPlayer(severity, plugin);
         }
     }
 
-    private void itemThreat(@NotNull ThreatLevel severity) {
+    private void itemThreat(@NotNull ThreatLevel severity, @NotNull Plush plugin) {
         if (!severity.equals(ThreatLevel.MEDIUM)) return;
 
         final Inventory inventory = getCause().getInventory();
@@ -84,14 +106,17 @@ public abstract class Threat implements IThreat {
                                 + getType().name()
                 )
         );
+        plugin.getLog().info("Handling: " + "Removed the item.");
     }
-    private void codeThreat(@NotNull ThreatLevel severity) {
+
+    private void codeThreat(@NotNull ThreatLevel severity, Plush plugin) {
         if (!severity.equals(ThreatLevel.MEDIUM)) return;
 
         getCause().kickPlayer(ColorUtils.getColored("&cYou have been kicked, use the right code!"));
+        plugin.getLog().info("Handling: " + "Kicked the player.");
     }
 
-    private void banPlayer(@NotNull ThreatLevel severity) {
+    private void banPlayer(@NotNull ThreatLevel severity, @NotNull Plush plugin) {
         if (!severity.equals(ThreatLevel.HIGH)) return;
 
         getCause().getServer().getBanList(BanList.Type.NAME).addBan(
@@ -108,6 +133,7 @@ public abstract class Threat implements IThreat {
                                 + getType().name()
                 )
         );
+        plugin.getLog().info("Handling: " + "Banned the player.");
     }
 
     /**

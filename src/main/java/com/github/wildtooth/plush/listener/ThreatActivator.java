@@ -1,9 +1,11 @@
 package com.github.wildtooth.plush.listener;
 
 import com.github.wildtooth.plush.Plush;
+import com.github.wildtooth.plush.event.code.WrongCodeEvent;
 import com.github.wildtooth.plush.event.item.IllegalItemUseEvent;
 import com.github.wildtooth.plush.security.threat.IllegalUseThreat;
 import com.github.wildtooth.plush.security.threat.ThreatLevel;
+import com.github.wildtooth.plush.security.threat.WrongCodeThreat;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.jetbrains.annotations.NotNull;
@@ -25,6 +27,19 @@ public final class ThreatActivator implements Listener {
         this.plugin = plugin;
     }
 
+    @EventHandler
+    public void onWrongCodeInput(@NotNull WrongCodeEvent event) {
+        WrongCodeThreat threat = new WrongCodeThreat(
+                "Wrong code input detected",
+                ThreatLevel.LOW,
+                event.getPlayer(),
+                event.getCode());
+
+        threat.setExecutor(plugin.getThreatHandler());
+
+        plugin.getThreatHandler().handle(threat);
+    }
+
     /**
      * On illegal item use.
      *
@@ -37,6 +52,8 @@ public final class ThreatActivator implements Listener {
                 ThreatLevel.LOW,
                 event.getItem(),
                 event.getPlayer());
+
+        threat.setExecutor(plugin.getThreatHandler());
 
         plugin.getThreatHandler().handle(threat);
     }

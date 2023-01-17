@@ -1,4 +1,4 @@
 name: Plush
 version: '${project.version}'
-main: com.github.wildtooth.plush.plush.Plush
+main: com.github.wildtooth.plush.Plush
 authors: [ Champen_V1ldtand, NqcoMC ]
