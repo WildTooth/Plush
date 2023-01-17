@@ -35,6 +35,8 @@ public final class ThreatActivator implements Listener {
                 event.getPlayer(),
                 event.getCode());
 
+        threat.setExecutor(plugin.getThreatHandler());
+
         plugin.getThreatHandler().handle(threat);
     }
 
@@ -50,6 +52,8 @@ public final class ThreatActivator implements Listener {
                 ThreatLevel.LOW,
                 event.getItem(),
                 event.getPlayer());
+
+        threat.setExecutor(plugin.getThreatHandler());
 
         plugin.getThreatHandler().handle(threat);
     }

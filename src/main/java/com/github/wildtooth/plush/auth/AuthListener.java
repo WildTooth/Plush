@@ -8,9 +8,8 @@ import com.warrenstrange.googleauth.GoogleAuthenticatorKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
@@ -75,6 +74,32 @@ public class AuthListener implements Listener {
             } catch (NumberFormatException e) {
                 player.sendMessage("§cInvalid code.");
             }
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerMove(@NotNull PlayerMoveEvent event) {
+        final Player player = event.getPlayer();
+        if (authHandler.isAuthLocked(player)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteract(@NotNull EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player) {
+            final Player player = (Player) event.getDamager();
+            if (authHandler.isAuthLocked(player)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @EventHandler
+    public void onCommand(@NotNull PlayerCommandPreprocessEvent event) {
+        final Player player = event.getPlayer();
+        if (authHandler.isAuthLocked(player)) {
             event.setCancelled(true);
         }
     }

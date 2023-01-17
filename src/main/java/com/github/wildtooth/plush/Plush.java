@@ -1,6 +1,7 @@
 package com.github.wildtooth.plush;
 
 import com.github.wildtooth.plush.auth.AuthHandler;
+import com.github.wildtooth.plush.auth.AuthListener;
 import com.github.wildtooth.plush.listener.PlayerListener;
 import com.github.wildtooth.plush.listener.ThreatActivator;
 import com.github.wildtooth.plush.log.Log;
@@ -48,12 +49,13 @@ public final class Plush extends JavaPlugin {
     }
 
     private void initializeHandlers() {
-        threatHandler = new ThreatHandler();
+        threatHandler = new ThreatHandler(getInstance());
         authHandler = new AuthHandler();
     }
 
     private void registerListeners() {
         new PlayerListener(getInstance(), getAuthHandler());
+        new AuthListener(getInstance(), getAuthHandler());
         new ThreatActivator(getInstance());
     }
 

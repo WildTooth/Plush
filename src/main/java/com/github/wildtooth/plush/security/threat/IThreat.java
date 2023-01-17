@@ -1,5 +1,7 @@
 package com.github.wildtooth.plush.security.threat;
 
+import com.github.wildtooth.plush.Plush;
+import com.github.wildtooth.plush.security.handler.ThreatHandler;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,24 +19,42 @@ public interface IThreat {
     Threat.ThreatType getType();
 
     /**
-     * Gets threat description.
+     * Gets the description of the {@link Threat}.
      *
-     * @return the threat description
+     * @return the description
      */
-
     String getDescription();
 
     /**
-     * Gets threat level.
+     * Gets the {@link ThreatHandler} that will execute the {@link Threat}.
+     *
+     * @return the executor
+     */
+    ThreatHandler getExecutor();
+
+    /**
+     * Sets the {@link ThreatHandler} that will execute the {@link Threat}.
+     *
+     * @param executor the executor
+     */
+    void setExecutor(ThreatHandler executor);
+
+    /**
+     * Gets the {@link ThreatLevel} of the {@link Threat}.
      *
      * @return the threat level
      */
     ThreatLevel getThreatLevel();
 
+    /**
+     * Gets the {@link Player} that caused the {@link Threat}.
+     *
+     * @return the cause
+     */
     Player getCause();
 
     /**
-     * Execute.
+     * Execute the {@link Threat} with the given {@link ThreatLevel}.
      */
     void execute(@NotNull ThreatLevel severity);
 
