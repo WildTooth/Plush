@@ -7,17 +7,17 @@ import org.bukkit.entity.Player;
  */
 public final class WrongCodeThreat extends Threat {
 
-    private final String code;
+    private final Integer code;
 
     public WrongCodeThreat(String description,
                            ThreatLevel threatLevel,
                            Player theCause,
-                           String theCode) {
+                           Integer theCode) {
         super(ThreatType.WRONG_CODE, description, threatLevel, theCause);
         this.code = theCode;
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 }
