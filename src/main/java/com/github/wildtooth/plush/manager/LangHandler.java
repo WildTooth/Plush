@@ -1,9 +1,22 @@
 package com.github.wildtooth.plush.manager;
 
+import com.github.wildtooth.plush.Plush;
+import org.bukkit.configuration.file.FileConfiguration;
+
+import java.io.File;
+
 public class LangHandler {
 
+    private Plush plugin = null;
+    private File langFile = null;
+    private FileConfiguration lang = null;
+
+    public LangHandler(Plush plugin) {
+        this.plugin = plugin;
+    }
+
+
     public enum LangMessages {
-        // Auth
         AUTH_NEW_SECURE_USER("auth.new-secure-user"),
         AUTH_LOCKED("auth.locked"),
         AUTH_UNLOCKED("auth.unlocked"),
@@ -16,24 +29,11 @@ public class LangHandler {
         THREAT_LEVEL_MEDIUM("threat.threat-level-medium"),
         THREAT_LEVEL_HIGH("threat.threat-level-high"),
 
-        ILLEGAL_ENTITY_DAMAGE_MESSAGE("threat.illegal-entity-damage.message"),
-        ILLEGAL_ENTITY_DAMAGE_DESCRIPTION("threat.illegal-entity-damage.description"),
-
-        ILLEGAL_ENTITY_INTERACT_MESSAGE("threat.illegal-entity-interact.message"),
-        ILLEGAL_ENTITY_INTERACT_DESCRIPTION("threat.illegal-entity-interact.description"),
-
-        ILLEGAL_ITEM_DROP_MESSAGE("threat.illegal-item-drop.message"),
-        ILLEGAL_ITEM_DROP_DESCRIPTION("threat.illegal-item-drop.description"),
-
-        ILLEGAL_ITEM_PICKUP_MESSAGE("threat.illegal-item-pickup.message"),
-        ILLEGAL_ITEM_PICKUP_DESCRIPTION("threat.illegal-item-pickup.description"),
-
         ILLEGAL_ITEM_USE_MESSAGE("threat.illegal-item-use.message"),
         ILLEGAL_ITEM_USE_DESCRIPTION("threat.illegal-item-use.description"),
 
-
-
-        ERROR_NO_PERMISSION("error.no-permission"),
+        // General
+        GENERAL_NO_PERMISSION("general.no-permission"),
 
         ;
 

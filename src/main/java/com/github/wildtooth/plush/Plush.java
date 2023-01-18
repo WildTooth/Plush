@@ -2,16 +2,27 @@ package com.github.wildtooth.plush;
 
 import com.github.wildtooth.plush.auth.AuthHandler;
 import com.github.wildtooth.plush.auth.AuthListener;
+import com.github.wildtooth.plush.enums.Hook;
+import com.github.wildtooth.plush.hook.VaultHook;
+import com.github.wildtooth.plush.interfaces.IHook;
 import com.github.wildtooth.plush.listener.PlayerListener;
 import com.github.wildtooth.plush.listener.ThreatActivator;
 import com.github.wildtooth.plush.log.Log;
 import com.github.wildtooth.plush.manager.DataManager;
 import com.github.wildtooth.plush.security.handler.ThreatHandler;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.HashMap;
 
 public final class Plush extends JavaPlugin {
 
     private static Plush INSTANCE;
+    private static final HashMap<String, Plugin> DEPENDANTS = new HashMap<>();
+    private static final HashMap<Hook, Boolean> HOOKS = new HashMap<>();
+
     private ThreatHandler threatHandler;
     private AuthHandler authHandler;
     private final DataManager dataManager = new DataManager(this);
@@ -28,6 +39,17 @@ public final class Plush extends JavaPlugin {
 
         // Plugin startup logic
         this.getDataManager().init();
+
+        Bukkit.getLogger().info("Loading dependant plugins.");
+        for(Plugin dependant : getServer().getPluginManager().getPlugins()){
+            PluginDescriptionFile pdf = dependant.getDescription();
+            if(pdf.getDepend().contains(getName()) || pdf.getSoftDepend().contains(getName()))
+                DEPENDANTS.put(dependant.getName(), dependant);
+        }
+        Bukkit.getLogger().info(String.format("Loaded dependants (%d): %s", DEPENDANTS.size(), DEPENDANTS.values()));
+
+        Bukkit.getLogger().info("Initialising hooks...");
+        initialiseHooks();
 
         this.getLogger().info("Initializing Handlers...");
         initializeHandlers();
@@ -62,6 +84,18 @@ public final class Plush extends JavaPlugin {
     @SuppressWarnings({"empty-statement"})
     private void registerCommands() {
 
+    }
+
+    private void initialiseHooks(){
+        IHook[] hooks = new IHook[]{
+                new VaultHook(),
+        };
+        for(IHook hook : hooks)
+            HOOKS.put(hook.getEnum(), hook.init(this));
+    }
+
+    public static boolean isHookInitialised(Hook paramHook) {
+        return HOOKS.getOrDefault(paramHook, false);
     }
 
     /**
