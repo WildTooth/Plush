@@ -49,7 +49,7 @@ public final class Plush extends JavaPlugin {
         Bukkit.getLogger().info(String.format("Loaded dependants (%d): %s", DEPENDANTS.size(), DEPENDANTS.values()));
 
         Bukkit.getLogger().info("Initialising hooks...");
-        initialiseHooks();
+        initializeHooks();
 
         this.getLogger().info("Initializing Handlers...");
         initializeHandlers();
@@ -86,12 +86,12 @@ public final class Plush extends JavaPlugin {
 
     }
 
-    private void initialiseHooks(){
+    private void initializeHooks(){
         IHook[] hooks = new IHook[]{
                 new VaultHook(),
         };
         for(IHook hook : hooks)
-            HOOKS.put(hook.getEnum(), hook.init(this));
+            HOOKS.put(hook.getEnum(), hook.init(getInstance()));
     }
 
     public static boolean isHookInitialised(Hook paramHook) {

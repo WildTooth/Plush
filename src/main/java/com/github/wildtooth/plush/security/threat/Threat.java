@@ -141,25 +141,25 @@ public abstract class Threat implements IThreat {
      */
     public enum ThreatType {
         /**
-         * Wrong code threat type.
+         * Describes a {@link Threat} that is caused by a {@link Player}
+         * using a command in a wrong way.
          */
         WRONG_CODE,
         /**
-         * Illegal command threat type.
+         * Describes a {@link Threat} that is caused by a {@link Player}
+         * using a command in a wrong way.
          */
         ILLEGAL_COMMAND,
         /**
-         * Illegal item threat type.
+         * Describes a {@link Threat} caused by a {@link Player}
+         * using an illegal item.
          */
         ILLEGAL_ITEM,
         /**
-         * Illegal block threat type.
+         * Describes a {@link Threat} caused by a {@link Player}
+         * interacting with a blacklisted entity.
          */
-        ILLEGAL_BLOCK,
-        /**
-         * Illegal entity threat type.
-         */
-        ILLEGAL_ENTITY
+        ILLEGAL_ENTITY,
         ;
 
         ThreatType() {
